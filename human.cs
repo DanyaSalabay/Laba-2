@@ -8,6 +8,7 @@ internal class Human
     {
         this.name = name;
         this.height = height;
+        this.father = null;
     }
 
     public Human(Name name, int height, Human father)
@@ -37,16 +38,23 @@ internal class Human
         string lastName = name.LastName;
         string middleName = name.MiddleName;
 
-        if (lastName == "" && father != null && father.Name.LastName != "")
+        if (lastName == "" && father != null &&
+            father.Name.LastName != "")
         {
             name.LastName = father.Name.LastName;
         }
 
-        if (middleName == "" && father != null && father.Name.FirstName != "")
+        if (middleName == "" && father != null &&
+            father.Name.FirstName != "")
         {
             name.MiddleName = father.Name.FirstName + "ович";
         }
 
-        return name + ", рост " + height;
+        if (height > 0)
+        {
+            return name + ", рост " + height;
+        }
+
+        return name.ToString();
     }
 }
